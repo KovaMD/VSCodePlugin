@@ -1,0 +1,39 @@
+{
+  "name": "kova",
+  "displayName": "Kova",
+  "description": "Syntax highlighting for Kova Markdown presentations, plus Present with Kova... from the command palette.",
+  "version": "0.0.1",
+  "publisher": "kovamd",
+  "license": "GPL-3.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "kova",
+    "markdown",
+    "slides",
+    "presentation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KovaMD/VSCodePlugin.git"
+  },
+  "homepage": "https://kova.md",
+  "bugs": {
+    "url": "https://github.com/KovaMD/VSCodePlugin/issues"
+  },
+  "contributes": {
+    "grammars": [
+      {
+        "scopeName": "markdown.kova.injection",
+        "path": "./syntaxes/kova.tmLanguage.json",
+        "injectTo": [
+          "text.html.markdown"
+        ]
+      }
+    ]
+  }
+}

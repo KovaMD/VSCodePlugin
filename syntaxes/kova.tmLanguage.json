@@ -1,0 +1,119 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Kova Markdown",
+  "scopeName": "markdown.kova.injection",
+  "patterns": [
+    { "include": "#frontmatter" },
+    { "include": "#slide-separator" },
+    { "include": "#speaker-notes" },
+    { "include": "#column-break" },
+    { "include": "#comment-directive" },
+    { "include": "#bang-bracket-directive" },
+    { "include": "#bang-bare-directive" },
+    { "include": "#bang-toc" },
+    { "include": "#bg-image" },
+    { "include": "#callout" },
+    { "include": "#template-variable" }
+  ],
+  "repository": {
+    "frontmatter": {
+      "begin": "\\A(---)\\s*$",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.frontmatter.kova" }
+      },
+      "end": "^(---)\\s*$",
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.frontmatter.kova" }
+      },
+      "name": "meta.frontmatter.kova",
+      "patterns": [
+        {
+          "match": "^\\s*(title|author|theme|theme_overrides|aspect_ratio|date|logo|footer)\\s*(:)",
+          "captures": {
+            "1": { "name": "support.type.property-name.kova" },
+            "2": { "name": "punctuation.separator.key-value.kova" }
+          }
+        }
+      ]
+    },
+    "slide-separator": {
+      "match": "^---\\s*$",
+      "name": "keyword.control.separator.slide.kova"
+    },
+    "speaker-notes": {
+      "match": "^\\?\\?\\?\\s*$",
+      "name": "keyword.control.marker.notes.kova"
+    },
+    "column-break": {
+      "match": "^\\|\\|\\|\\s*$",
+      "name": "keyword.control.separator.column.kova"
+    },
+    "comment-directive": {
+      "match": "(<!--)\\s*(layout|hidden|color|_color|_class|step)\\b(?:\\s*(:)\\s*([^-]*?)\\s*)?(-->)",
+      "captures": {
+        "1": { "name": "punctuation.definition.comment.begin.kova" },
+        "2": { "name": "keyword.control.directive.kova" },
+        "3": { "name": "punctuation.separator.key-value.kova" },
+        "4": { "name": "string.unquoted.directive-value.kova" },
+        "5": { "name": "punctuation.definition.comment.end.kova" }
+      }
+    },
+    "bang-bracket-directive": {
+      "match": "^(!)(youtube|video|poll|progress|ref|caption|include|fmt|code)(\\[)([^\\]]*)(\\])(?:(\\()([^)]*)(\\)))?",
+      "captures": {
+        "1": { "name": "punctuation.definition.directive.kova" },
+        "2": { "name": "keyword.control.directive.bang.kova" },
+        "3": { "name": "punctuation.definition.brackets.kova" },
+        "4": { "name": "string.other.label.kova" },
+        "5": { "name": "punctuation.definition.brackets.kova" },
+        "6": { "name": "punctuation.definition.parens.kova" },
+        "7": { "name": "string.other.link.kova" },
+        "8": { "name": "punctuation.definition.parens.kova" }
+      }
+    },
+    "bang-bare-directive": {
+      "match": "^(!)(let|sheet)\\b(.*)$",
+      "captures": {
+        "1": { "name": "punctuation.definition.directive.kova" },
+        "2": { "name": "keyword.control.directive.bang.kova" },
+        "3": { "name": "variable.other.kova" }
+      }
+    },
+    "bang-toc": {
+      "match": "^(!)(toc)\\b",
+      "captures": {
+        "1": { "name": "punctuation.definition.directive.kova" },
+        "2": { "name": "keyword.control.directive.bang.kova" }
+      }
+    },
+    "bg-image": {
+      "match": "(!\\[)(bg[^\\]]*)(\\])(\\()([^)]*)(\\))",
+      "captures": {
+        "1": { "name": "punctuation.definition.brackets.kova" },
+        "2": { "name": "keyword.control.directive.bgimage.kova" },
+        "3": { "name": "punctuation.definition.brackets.kova" },
+        "4": { "name": "punctuation.definition.parens.kova" },
+        "5": { "name": "string.other.link.kova" },
+        "6": { "name": "punctuation.definition.parens.kova" }
+      }
+    },
+    "callout": {
+      "match": "^(>)\\s*(\\[!)([a-zA-Z-]+)(\\])\\s*(.*)$",
+      "captures": {
+        "1": { "name": "punctuation.definition.quote.kova" },
+        "2": { "name": "punctuation.definition.brackets.kova" },
+        "3": { "name": "keyword.control.callout-type.kova" },
+        "4": { "name": "punctuation.definition.brackets.kova" },
+        "5": { "name": "markup.italic.callout-title.kova" }
+      }
+    },
+    "template-variable": {
+      "match": "(\\{)(title|author|date|slide_number|total)(\\})",
+      "captures": {
+        "1": { "name": "punctuation.definition.template-variable.kova" },
+        "2": { "name": "variable.parameter.kova" },
+        "3": { "name": "punctuation.definition.template-variable.kova" }
+      }
+    }
+  }
+}
