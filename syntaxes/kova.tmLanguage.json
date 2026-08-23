@@ -2,8 +2,9 @@
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Kova Markdown",
   "scopeName": "markdown.kova.injection",
+  "injectionSelector": "L:text.html.markdown",
   "patterns": [
-    { "include": "#frontmatter" },
+    { "include": "#frontmatter-key" },
     { "include": "#slide-separator" },
     { "include": "#speaker-notes" },
     { "include": "#column-break" },
@@ -16,25 +17,13 @@
     { "include": "#template-variable" }
   ],
   "repository": {
-    "frontmatter": {
-      "begin": "\\A(---)\\s*$",
-      "beginCaptures": {
-        "1": { "name": "punctuation.definition.frontmatter.kova" }
-      },
-      "end": "^(---)\\s*$",
-      "endCaptures": {
-        "1": { "name": "punctuation.definition.frontmatter.kova" }
-      },
-      "name": "meta.frontmatter.kova",
-      "patterns": [
-        {
-          "match": "^\\s*(title|author|theme|theme_overrides|aspect_ratio|date|logo|footer)\\s*(:)",
-          "captures": {
-            "1": { "name": "support.type.property-name.kova" },
-            "2": { "name": "punctuation.separator.key-value.kova" }
-          }
-        }
-      ]
+    "frontmatter-key": {
+      "comment": "Stateless by design: begin/end blocks don't reliably close when used inside a TextMate *injection* grammar (confirmed empirically, not just in theory), so this matches the key pattern on any line rather than tracking whether we're inside a --- --- block.",
+      "match": "^\\s*(title|author|theme|theme_overrides|aspect_ratio|date|logo|footer)\\s*(:)",
+      "captures": {
+        "1": { "name": "support.type.property-name.kova" },
+        "2": { "name": "punctuation.separator.key-value.kova" }
+      }
     },
     "slide-separator": {
       "match": "^---\\s*$",
@@ -49,7 +38,7 @@
       "name": "keyword.control.separator.column.kova"
     },
     "comment-directive": {
-      "match": "(<!--)\\s*(layout|hidden|color|_color|_class|step)\\b(?:\\s*(:)\\s*([^-]*?)\\s*)?(-->)",
+      "match": "(<!--)\\s*(layout|hidden|color|_color|_class|step)\\b(?:\\s*(:)\\s*([^-]*?))?\\s*(-->)",
       "captures": {
         "1": { "name": "punctuation.definition.comment.begin.kova" },
         "2": { "name": "keyword.control.directive.kova" },

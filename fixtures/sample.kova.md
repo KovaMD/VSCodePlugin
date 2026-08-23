@@ -8,9 +8,12 @@ logo: ./logo.png
 footer: "{title} — {author}"
 ---
 
-# Welcome to {title}
+# Welcome to Kova
 
-This slide exercises every token the Kova grammar should highlight.
+This slide exercises every token the Kova grammar should highlight. Template
+variables like `{title}` only substitute in header/footer text (see the
+`footer:` key above), never in slide body content, so this heading
+deliberately doesn't use one.
 
 <!-- layout: title -->
 <!-- color: #ffffff -->
@@ -20,15 +23,12 @@ This slide exercises every token the Kova grammar should highlight.
 
 ## Speaker notes and steps
 
-Point one appears first.
+Paragraphs use the trailing-inline form of the marker, on the same line. <!-- step -->
 
-<!-- step -->
-
-Point two appears second.
+- List items can instead use a standalone marker on the line after the block.
+- It only works after an eligible block (list, image, table, code, and a few others) — never after a plain paragraph, which is what produced the `#ERR` in the first draft of this fixture.
 
 <!-- step: 3 -->
-
-Point three appears third.
 
 ???
 
