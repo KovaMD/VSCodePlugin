@@ -8,7 +8,9 @@
       "args": [
         "--extensionDevelopmentPath=${workspaceFolder}",
         "${workspaceFolder}/fixtures/sample.kova.md"
-      ]
+      ],
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "preLaunchTask": "npm: compile"
     }
   ]
 }

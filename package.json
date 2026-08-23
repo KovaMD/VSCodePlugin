@@ -25,6 +25,7 @@
   "bugs": {
     "url": "https://github.com/KovaMD/VSCodePlugin/issues"
   },
+  "main": "./dist/extension.js",
   "contributes": {
     "grammars": [
       {
@@ -34,6 +35,41 @@
           "text.html.markdown"
         ]
       }
-    ]
+    ],
+    "commands": [
+      {
+        "command": "kova.present",
+        "title": "Present with Kova...",
+        "category": "Kova",
+        "icon": "$(play-circle)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "kova.present",
+          "when": "editorLangId == markdown"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "kova.present",
+          "when": "editorLangId == markdown",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "check-types": "tsc --noEmit",
+    "vscode:prepublish": "npm run check-types && node esbuild.js --production"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.5.4"
   }
 }
