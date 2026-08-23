@@ -1,0 +1,142 @@
+{
+  "Kova: Slide separator": {
+    "prefix": "kova-slide",
+    "body": ["---", "", "$0"],
+    "description": "Start a new slide"
+  },
+  "Kova: Speaker notes": {
+    "prefix": "kova-notes",
+    "body": ["???", "", "$0"],
+    "description": "Everything below becomes speaker notes for this slide"
+  },
+  "Kova: Column break": {
+    "prefix": "kova-col",
+    "body": ["|||", "", "$0"],
+    "description": "Split the slide into another column"
+  },
+  "Kova: Layout": {
+    "prefix": "kova-layout",
+    "body": [
+      "<!-- layout: ${1|title,section,title-content,title-image,split,full-bleed,quote,two-column,three-column,bsp,grid,media,code,math,blank|} -->",
+      "$0"
+    ],
+    "description": "Set the layout for this slide"
+  },
+  "Kova: Hidden slide": {
+    "prefix": "kova-hidden",
+    "body": ["<!-- hidden -->"],
+    "description": "Exclude this slide from the deck"
+  },
+  "Kova: Text color": {
+    "prefix": "kova-color",
+    "body": ["<!-- color: ${1:#ffffff} -->"],
+    "description": "Override text color for this slide"
+  },
+  "Kova: Marp class": {
+    "prefix": "kova-class",
+    "body": ["<!-- _class: ${1:invert} -->"],
+    "description": "Marp-compatible slide class"
+  },
+  "Kova: Step marker": {
+    "prefix": "kova-step",
+    "body": ["<!-- step -->"],
+    "description": "Reveal the next element as a build step"
+  },
+  "Kova: Numbered step marker": {
+    "prefix": "kova-step-n",
+    "body": ["<!-- step: ${1:1} -->"],
+    "description": "Reveal this element at a specific step number"
+  },
+  "Kova: YouTube embed": {
+    "prefix": "kova-yt",
+    "body": ["!youtube[${1:label}](${2:https://www.youtube.com/watch?v=})$0"],
+    "description": "Embed a YouTube video"
+  },
+  "Kova: Video embed": {
+    "prefix": "kova-video",
+    "body": ["!video[${1:label}](${2:./path/to/video.mp4})$0"],
+    "description": "Embed a local or remote video"
+  },
+  "Kova: Poll": {
+    "prefix": "kova-poll",
+    "body": ["!poll[${1:label}](${2:https://})$0"],
+    "description": "Embed a live poll"
+  },
+  "Kova: Progress bar": {
+    "prefix": "kova-progress",
+    "body": ["!progress[${1:label}](${2:0.5})$0"],
+    "description": "Show a progress indicator"
+  },
+  "Kova: Reference": {
+    "prefix": "kova-ref",
+    "body": ["!ref[${1:Author, Year. Title}]$0"],
+    "description": "Add a citation"
+  },
+  "Kova: Table of contents": {
+    "prefix": "kova-toc",
+    "body": ["!toc"],
+    "description": "Insert a table of contents"
+  },
+  "Kova: Caption": {
+    "prefix": "kova-caption",
+    "body": ["!caption[${1:text}]$0"],
+    "description": "Caption the image, table, or diagram above"
+  },
+  "Kova: Constant": {
+    "prefix": "kova-let",
+    "body": ["!let ${1:name} = ${2:value}$0"],
+    "description": "Define a reusable constant"
+  },
+  "Kova: Sheet": {
+    "prefix": "kova-sheet",
+    "body": ["!sheet ${1:name} precision=${2:2}", "$0"],
+    "description": "Format the table below as a data sheet"
+  },
+  "Kova: Background image": {
+    "prefix": "kova-bg",
+    "body": ["![bg ${1:left:40%}, ${2:contain}](${3:./path/to/image.jpg})$0"],
+    "description": "Marp-compatible background image"
+  },
+  "Kova: Note callout": {
+    "prefix": "kova-note",
+    "body": ["> [!note]", "> $0"],
+    "description": "Note callout"
+  },
+  "Kova: Tip callout": {
+    "prefix": "kova-tip",
+    "body": ["> [!tip]", "> $0"],
+    "description": "Tip callout"
+  },
+  "Kova: Warning callout": {
+    "prefix": "kova-warning",
+    "body": ["> [!warning] ${1:Title}", "> $0"],
+    "description": "Warning callout"
+  },
+  "Kova: Danger callout": {
+    "prefix": "kova-danger",
+    "body": ["> [!danger] ${1:Title}", "> $0"],
+    "description": "Danger callout"
+  },
+  "Kova: Info callout": {
+    "prefix": "kova-info",
+    "body": ["> [!info]", "> $0"],
+    "description": "Info callout"
+  },
+  "Kova: Frontmatter": {
+    "prefix": "kova-frontmatter",
+    "body": [
+      "---",
+      "title: ${1:Presentation Title}",
+      "author: ${2:Your Name}",
+      "theme: ${3:default}",
+      "aspect_ratio: ${4:16:9}",
+      "date: ${5:2026-08-23}",
+      "logo: ${6:./logo.png}",
+      "footer: \"${7:{title} - {author}}\"",
+      "---",
+      "",
+      "$0"
+    ],
+    "description": "Deck-level frontmatter block"
+  }
+}

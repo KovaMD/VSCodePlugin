@@ -36,6 +36,12 @@
         ]
       }
     ],
+    "snippets": [
+      {
+        "language": "markdown",
+        "path": "./snippets/kova.code-snippets"
+      }
+    ],
     "commands": [
       {
         "command": "kova.present",

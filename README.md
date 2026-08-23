@@ -26,6 +26,10 @@ One known limitation: `|||` as a column break is ambiguous with an all-empty GFM
 
 Run **Kova: Present with Kova...** from the command palette, or use the play icon in the editor title bar on any Markdown file. It saves the file if there are unsaved changes, then launches `kova --present` on it. If Kova isn't found on your PATH (or, on Linux, isn't installed as a Flatpak either), you'll get a prompt linking to the releases page instead of a silent failure.
 
+## Snippets
+
+Type a prefix and press Tab in a Markdown file: `kova-slide`, `kova-notes`, `kova-col`, `kova-layout`, `kova-step`, `kova-yt`, `kova-video`, `kova-poll`, `kova-progress`, `kova-ref`, `kova-toc`, `kova-caption`, `kova-let`, `kova-sheet`, `kova-bg`, `kova-note` / `kova-tip` / `kova-warning` / `kova-danger` / `kova-info`, and `kova-frontmatter`.
+
 ## Development
 
 ```
