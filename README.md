@@ -24,11 +24,16 @@ One known limitation: `|||` as a column break is ambiguous with an all-empty GFM
 
 ## Present with Kova...
 
-Coming shortly: a command palette entry that saves the active file and launches `kova --present` on it.
+Run **Kova: Present with Kova...** from the command palette, or use the play icon in the editor title bar on any Markdown file. It saves the file if there are unsaved changes, then launches `kova --present` on it. If Kova isn't found on your PATH (or, on Linux, isn't installed as a Flatpak either), you'll get a prompt linking to the releases page instead of a silent failure.
 
 ## Development
 
-This extension ships a declarative TextMate grammar only, so there's nothing to compile. Open this folder in VS Code, press F5 to launch an Extension Development Host, and open `fixtures/sample.kova.md` to check highlighting.
+```
+npm install
+npm run compile
+```
+
+Then press F5 to launch an Extension Development Host with `fixtures/sample.kova.md` already open, to check both highlighting and the present command.
 
 ## License
 
