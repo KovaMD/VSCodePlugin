@@ -128,7 +128,7 @@
       "---",
       "title: ${1:Presentation Title}",
       "author: ${2:Your Name}",
-      "theme: ${3:default}",
+      "theme: ${3|light,dark,institutional,minimal,editorial,slate,pitch,cosmos,forge,grove,horizon|}",
       "aspect_ratio: ${4:16:9}",
       "date: ${5:2026-08-23}",
       "logo: ${6:./logo.png}",

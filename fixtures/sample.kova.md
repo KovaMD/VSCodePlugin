@@ -1,7 +1,7 @@
 ---
 title: Kova Syntax Fixture
 author: RDMillen
-theme: default
+theme: light
 aspect_ratio: 16:9
 date: 2026-08-23
 logo: ./logo.png

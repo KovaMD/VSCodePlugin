@@ -4,7 +4,8 @@
   "description": "Syntax highlighting for Kova Markdown presentations, plus Present with Kova... from the command palette.",
   "version": "0.0.1",
   "publisher": "kovamd",
-  "license": "GPL-3.0",
+  "license": "GPL-3.0-or-later",
+  "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.85.0"
   },
