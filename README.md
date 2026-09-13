@@ -39,6 +39,8 @@ npm run compile
 
 Then press F5 to launch an Extension Development Host with `fixtures/sample.kova.md` already open, to check both highlighting and the present command.
 
+`npm test` runs a headless tokenizer test against the grammar (loads `kova.tmLanguage.json` directly via `vscode-textmate`/`vscode-oniguruma` and asserts on the scopes it produces) — no editor required. `npm run package` builds a `.vsix` with `vsce` as a packaging smoke test. Both run in CI on every push and PR.
+
 ## License
 
 GPL-3.0, matching the main [Kova](https://github.com/KovaMD/Kova) repository.
