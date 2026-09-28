@@ -49,14 +49,65 @@
         "title": "Present with Kova...",
         "category": "Kova",
         "icon": "$(play-circle)"
-      }
+      },
+      { "command": "kova.insert.slideSeparator", "title": "Slide Separator", "category": "Kova" },
+      { "command": "kova.insert.speakerNotes", "title": "Speaker Notes", "category": "Kova" },
+      { "command": "kova.insert.columnBreak", "title": "Column Break", "category": "Kova" },
+      { "command": "kova.insert.frontmatter", "title": "Frontmatter Block", "category": "Kova" },
+      { "command": "kova.insert.layout", "title": "Layout", "category": "Kova" },
+      { "command": "kova.insert.hiddenSlide", "title": "Hidden Slide", "category": "Kova" },
+      { "command": "kova.insert.textColor", "title": "Text Color", "category": "Kova" },
+      { "command": "kova.insert.marpClass", "title": "Marp Class (_class)", "category": "Kova" },
+      { "command": "kova.insert.stepMarker", "title": "Step Marker", "category": "Kova" },
+      { "command": "kova.insert.numberedStepMarker", "title": "Numbered Step Marker", "category": "Kova" },
+      { "command": "kova.insert.youtube", "title": "YouTube Embed", "category": "Kova" },
+      { "command": "kova.insert.video", "title": "Video Embed", "category": "Kova" },
+      { "command": "kova.insert.poll", "title": "Poll", "category": "Kova" },
+      { "command": "kova.insert.progressBar", "title": "Progress Bar", "category": "Kova" },
+      { "command": "kova.insert.reference", "title": "Reference", "category": "Kova" },
+      { "command": "kova.insert.tableOfContents", "title": "Table of Contents", "category": "Kova" },
+      { "command": "kova.insert.caption", "title": "Caption", "category": "Kova" },
+      { "command": "kova.insert.constant", "title": "Constant (!let)", "category": "Kova" },
+      { "command": "kova.insert.sheet", "title": "Sheet", "category": "Kova" },
+      { "command": "kova.insert.backgroundImage", "title": "Background Image", "category": "Kova" },
+      { "command": "kova.insert.noteCallout", "title": "Note Callout", "category": "Kova" },
+      { "command": "kova.insert.tipCallout", "title": "Tip Callout", "category": "Kova" },
+      { "command": "kova.insert.warningCallout", "title": "Warning Callout", "category": "Kova" },
+      { "command": "kova.insert.dangerCallout", "title": "Danger Callout", "category": "Kova" },
+      { "command": "kova.insert.infoCallout", "title": "Info Callout", "category": "Kova" }
+    ],
+    "submenus": [
+      { "id": "kova.contextMenu", "label": "Kova" },
+      { "id": "kova.insertMenu", "label": "Insert" }
     ],
     "menus": {
       "commandPalette": [
-        {
-          "command": "kova.present",
-          "when": "editorLangId == markdown"
-        }
+        { "command": "kova.present", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.slideSeparator", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.speakerNotes", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.columnBreak", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.frontmatter", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.layout", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.hiddenSlide", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.textColor", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.marpClass", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.stepMarker", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.numberedStepMarker", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.youtube", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.video", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.poll", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.progressBar", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.reference", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.tableOfContents", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.caption", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.constant", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.sheet", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.backgroundImage", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.noteCallout", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.tipCallout", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.warningCallout", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.dangerCallout", "when": "editorLangId == markdown" },
+        { "command": "kova.insert.infoCallout", "when": "editorLangId == markdown" }
       ],
       "editor/title": [
         {
@@ -64,6 +115,40 @@
           "when": "editorLangId == markdown",
           "group": "navigation"
         }
+      ],
+      "editor/context": [
+        { "submenu": "kova.contextMenu", "when": "editorLangId == markdown", "group": "1_modification" }
+      ],
+      "kova.contextMenu": [
+        { "command": "kova.present", "group": "1_actions" },
+        { "submenu": "kova.insertMenu", "group": "2_insert" }
+      ],
+      "kova.insertMenu": [
+        { "command": "kova.insert.slideSeparator", "group": "1_structure@1" },
+        { "command": "kova.insert.speakerNotes", "group": "1_structure@2" },
+        { "command": "kova.insert.columnBreak", "group": "1_structure@3" },
+        { "command": "kova.insert.frontmatter", "group": "1_structure@4" },
+        { "command": "kova.insert.layout", "group": "2_comments@1" },
+        { "command": "kova.insert.hiddenSlide", "group": "2_comments@2" },
+        { "command": "kova.insert.textColor", "group": "2_comments@3" },
+        { "command": "kova.insert.marpClass", "group": "2_comments@4" },
+        { "command": "kova.insert.stepMarker", "group": "2_comments@5" },
+        { "command": "kova.insert.numberedStepMarker", "group": "2_comments@6" },
+        { "command": "kova.insert.youtube", "group": "3_content@1" },
+        { "command": "kova.insert.video", "group": "3_content@2" },
+        { "command": "kova.insert.poll", "group": "3_content@3" },
+        { "command": "kova.insert.progressBar", "group": "3_content@4" },
+        { "command": "kova.insert.reference", "group": "3_content@5" },
+        { "command": "kova.insert.tableOfContents", "group": "3_content@6" },
+        { "command": "kova.insert.caption", "group": "3_content@7" },
+        { "command": "kova.insert.constant", "group": "3_content@8" },
+        { "command": "kova.insert.sheet", "group": "3_content@9" },
+        { "command": "kova.insert.backgroundImage", "group": "3_content@10" },
+        { "command": "kova.insert.noteCallout", "group": "4_callouts@1" },
+        { "command": "kova.insert.tipCallout", "group": "4_callouts@2" },
+        { "command": "kova.insert.warningCallout", "group": "4_callouts@3" },
+        { "command": "kova.insert.dangerCallout", "group": "4_callouts@4" },
+        { "command": "kova.insert.infoCallout", "group": "4_callouts@5" }
       ]
     }
   },
@@ -72,6 +157,7 @@
     "watch": "node esbuild.js --watch",
     "check-types": "tsc --noEmit",
     "test": "node --test",
+    "check-kova-sync": "node scripts/check-kova-sync.js",
     "package": "mkdir -p dist-package && vsce package --out dist-package/kova.vsix",
     "vscode:prepublish": "npm run check-types && node esbuild.js --production"
   },
