@@ -97,6 +97,21 @@ test('comment directives scope the key and value, hyphenated values included', a
   }
 });
 
+test('color/_color directives are matched case-insensitively, matching the real parser\'s COLOR_COMMENT_RE', async () => {
+  const line = '<!-- COLOR: #ffffff -->';
+  const tokens = await tokenizeLine(line);
+  assertScope(tokens, 'COLOR', 'keyword.control.directive.kova', line);
+  assertScope(tokens, '#ffffff', 'string.unquoted.directive-value.kova', line);
+});
+
+test('layout/hidden/_class/step stay case-sensitive, matching the real parser', async () => {
+  const tokens = await tokenizeLine('<!-- LAYOUT: title -->');
+  assert.ok(
+    !tokens.some((t) => t.scopes.some((s) => s.endsWith('keyword.control.directive.kova'))),
+    'uppercase LAYOUT should not be scoped as a directive key',
+  );
+});
+
 test('comment directive flags without a value still scope the key', async () => {
   for (const line of ['<!-- hidden -->', '<!-- step -->']) {
     const tokens = await tokenizeLine(line);
@@ -139,6 +154,41 @@ test('!toc scopes as a bang directive with no trailing content', async () => {
   assertScope(await tokenizeLine('!toc'), 'toc', 'keyword.control.directive.bang.kova', '!toc');
 });
 
+test('!toc, !ref, !caption with trailing content are not scoped as directives (the real parser requires an anchored, exact match)', async () => {
+  for (const line of ['!toc please', '!ref[label](https://example.com)', '!caption[text](notes.md)']) {
+    const tokens = await tokenizeLine(line);
+    assert.ok(
+      tokens.every((t) => !t.scopes.some((s) => s.endsWith('keyword.control.directive.bang.kova'))),
+      `expected no bang-directive scope when tokenizing malformed directive: ${line}`,
+    );
+  }
+});
+
+test('youtube/video/poll/progress require the (...) payload — without it they are not scoped as directives', async () => {
+  for (const line of ['!youtube[Kova demo]', '!video[Local clip]', '!poll[Quick check]', '!progress[Rollout]']) {
+    const tokens = await tokenizeLine(line);
+    assert.ok(
+      tokens.every((t) => !t.scopes.some((s) => s.endsWith('keyword.control.directive.bang.kova'))),
+      `expected no bang-directive scope for a parens-required directive missing its payload: ${line}`,
+    );
+  }
+});
+
+test('reserved directives (!include, !fmt, !code) scope as invalid, not as working directives', async () => {
+  for (const line of ['!include[label](./other.md)', '!fmt some expression', '!code console.log(1)']) {
+    const tokens = await tokenizeLine(line);
+    assertScope(tokens, '!', 'punctuation.definition.directive.kova', line);
+    assert.ok(
+      tokens.some((t) => t.scopes.some((s) => s.endsWith('invalid.illegal.reserved-directive.kova'))),
+      `expected an invalid.illegal scope for the reserved directive: ${line}`,
+    );
+    assert.ok(
+      !tokens.some((t) => t.scopes.some((s) => s.endsWith('keyword.control.directive.bang.kova'))),
+      `reserved directive should not be styled like a working bang directive: ${line}`,
+    );
+  }
+});
+
 test('background image directive scopes bg and the path', async () => {
   const line = '![bg left:40%, contain](./assets/hero.jpg)';
   const tokens = await tokenizeLine(line);
@@ -152,6 +202,14 @@ test('callouts scope the admonition type and an optional title', async () => {
   const tokens = await tokenizeLine(withTitle);
   assertScope(tokens, 'warning', 'keyword.control.callout-type.kova', withTitle);
   assertScope(tokens, 'Careful here', 'markup.italic.callout-title.kova', withTitle);
+});
+
+test('an Obsidian fold indicator ([!note]+) is scoped separately from the callout title', async () => {
+  const line = '> [!note]+ Collapsed by default';
+  const tokens = await tokenizeLine(line);
+  assertScope(tokens, 'note', 'keyword.control.callout-type.kova', line);
+  assertScope(tokens, '+', 'punctuation.definition.callout-fold.kova', line);
+  assertScope(tokens, 'Collapsed by default', 'markup.italic.callout-title.kova', line);
 });
 
 test('template variables are scoped only by their recognized names', async () => {

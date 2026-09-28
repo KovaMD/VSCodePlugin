@@ -20,7 +20,10 @@ Kova extends plain Markdown with a small, closed set of directives. This extensi
 
 See [`fixtures/sample.kova.md`](./fixtures/sample.kova.md) for one file exercising every token, and the [full syntax spec](https://github.com/KovaMD/Kova/blob/main/.github/CONTRIBUTING.md) in the main Kova repo.
 
-One known limitation: `|||` as a column break is ambiguous with an all-empty GFM table row. Kova's own parser disambiguates using table context; this grammar does not, so a `|||` inside a table may occasionally be mis-highlighted.
+Two known limitations:
+
+- `|||` as a column break is ambiguous with an all-empty GFM table row. Kova's own parser disambiguates using table context; this grammar does not, so a `|||` inside a table may occasionally be mis-highlighted.
+- Frontmatter keys are matched on any line that looks like `key:`, not just inside the leading `---`…`---` block (a TextMate injection grammar can't reliably track that boundary). A slide body line that happens to start with `title:`, `date:`, etc. will be highlighted as if it were a frontmatter key.
 
 ## Present with Kova...
 

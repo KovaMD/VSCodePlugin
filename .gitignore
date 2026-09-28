@@ -3,3 +3,7 @@ out/
 dist/
 *.vsix
 .DS_Store
+
+# Manual QA fixture for grammar edge cases -- not part of the automated
+# test suite, kept locally for testing but not published to GitHub.
+fixtures/edge-cases.kova.md

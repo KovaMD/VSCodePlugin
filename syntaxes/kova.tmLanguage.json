@@ -9,7 +9,10 @@
     { "include": "#speaker-notes" },
     { "include": "#column-break" },
     { "include": "#comment-directive" },
-    { "include": "#bang-bracket-directive" },
+    { "include": "#comment-directive-color" },
+    { "include": "#bang-bracket-directive-embed" },
+    { "include": "#bang-bracket-directive-plain" },
+    { "include": "#bang-reserved-directive" },
     { "include": "#bang-bare-directive" },
     { "include": "#bang-toc" },
     { "include": "#bg-image" },
@@ -38,8 +41,8 @@
       "name": "keyword.control.separator.column.kova"
     },
     "comment-directive": {
-      "comment": "The value capture is [^>]*? (not [^-]*?): layout/_class values are routinely hyphenated (full-bleed, title-content, two-column), and [^-] made the whole match fail on those rather than degrade. [^>] still can't run past the closing -->.",
-      "match": "(<!--)\\s*(layout|hidden|color|_color|_class|step)\\b(?:\\s*(:)\\s*([^>]*?))?\\s*(-->)",
+      "comment": "The value capture is [^>]*? (not [^-]*?): layout/_class values are routinely hyphenated (full-bleed, title-content, two-column), and [^-] made the whole match fail on those rather than degrade. [^>] still can't run past the closing -->. layout/hidden/_class/step are case-sensitive in the real parser (no /i there), unlike color/_color below -- kept as a separate rule since a single regex can't apply /i to only some of its alternatives.",
+      "match": "(<!--)\\s*(layout|hidden|_class|step)\\b(?:\\s*(:)\\s*([^>]*?))?\\s*(-->)",
       "captures": {
         "1": { "name": "punctuation.definition.comment.begin.kova" },
         "2": { "name": "keyword.control.directive.kova" },
@@ -48,8 +51,20 @@
         "5": { "name": "punctuation.definition.comment.end.kova" }
       }
     },
-    "bang-bracket-directive": {
-      "match": "^(!)(youtube|video|poll|progress|ref|caption|include|fmt|code)(\\[)([^\\]]*)(\\])(?:(\\()([^)]*)(\\)))?",
+    "comment-directive-color": {
+      "comment": "color/_color alone: Kova's COLOR_COMMENT_RE matches case-insensitively (unlike layout/hidden/_class/step), so <!-- COLOR: ... --> is real, working syntax that must be highlighted too.",
+      "match": "(<!--)\\s*((?i:_?color))\\b(?:\\s*(:)\\s*([^>]*?))?\\s*(-->)",
+      "captures": {
+        "1": { "name": "punctuation.definition.comment.begin.kova" },
+        "2": { "name": "keyword.control.directive.kova" },
+        "3": { "name": "punctuation.separator.key-value.kova" },
+        "4": { "name": "string.unquoted.directive-value.kova" },
+        "5": { "name": "punctuation.definition.comment.end.kova" }
+      }
+    },
+    "bang-bracket-directive-embed": {
+      "comment": "youtube/video/poll/progress all require the (...) payload -- Kova's parser anchors the whole trimmed line ($) and doesn't recognise the directive at all without one, falling back to literal/plain-markdown text instead.",
+      "match": "^(!)(youtube|video|poll|progress)(\\[)([^\\]]*)(\\])(\\()([^)]*)(\\))\\s*$",
       "captures": {
         "1": { "name": "punctuation.definition.directive.kova" },
         "2": { "name": "keyword.control.directive.bang.kova" },
@@ -61,6 +76,25 @@
         "8": { "name": "punctuation.definition.parens.kova" }
       }
     },
+    "bang-bracket-directive-plain": {
+      "comment": "ref/caption take no (...) payload -- REF_RE/CAPTION_RE anchor right after the closing ] ($), so a trailing (...) (e.g. copying the youtube/video form by habit) breaks the match entirely: the line falls back to plain markdown, i.e. a stray ! followed by an ordinary link, not a citation/caption.",
+      "match": "^(!)(ref|caption)(\\[)([^\\]]*)(\\])\\s*$",
+      "captures": {
+        "1": { "name": "punctuation.definition.directive.kova" },
+        "2": { "name": "keyword.control.directive.bang.kova" },
+        "3": { "name": "punctuation.definition.brackets.kova" },
+        "4": { "name": "string.other.label.kova" },
+        "5": { "name": "punctuation.definition.brackets.kova" }
+      }
+    },
+    "bang-reserved-directive": {
+      "comment": "include/fmt/code are recognised words but RESERVED_RE always turns them into #ERR '...' is reserved for a future release, regardless of shape -- scoped as invalid rather than styled like a working directive.",
+      "match": "^(!)(include|fmt|code)\\b",
+      "captures": {
+        "1": { "name": "punctuation.definition.directive.kova" },
+        "2": { "name": "invalid.illegal.reserved-directive.kova" }
+      }
+    },
     "bang-bare-directive": {
       "match": "^(!)(let|sheet)\\b(.*)$",
       "captures": {
@@ -70,7 +104,8 @@
       }
     },
     "bang-toc": {
-      "match": "^(!)(toc)\\b",
+      "comment": "TOC_RE is fully anchored (^!toc$) -- trailing content on the line breaks recognition and it falls back to literal text.",
+      "match": "^(!)(toc)\\s*$",
       "captures": {
         "1": { "name": "punctuation.definition.directive.kova" },
         "2": { "name": "keyword.control.directive.bang.kova" }
@@ -88,13 +123,15 @@
       }
     },
     "callout": {
-      "match": "^(>)\\s*(\\[!)([a-zA-Z-]+)(\\])\\s*(.*)$",
+      "comment": "CALLOUT_RE captures an optional Obsidian fold indicator ([+-]) separately from the title and strips it before display -- the grammar mirrors that split so '+'/'-' isn't swept into the italicized title text.",
+      "match": "^(>)\\s*(\\[!)([A-Za-z][\\w-]*)(\\])([+-]?)\\s*(.*)$",
       "captures": {
         "1": { "name": "punctuation.definition.quote.kova" },
         "2": { "name": "punctuation.definition.brackets.kova" },
         "3": { "name": "keyword.control.callout-type.kova" },
         "4": { "name": "punctuation.definition.brackets.kova" },
-        "5": { "name": "markup.italic.callout-title.kova" }
+        "5": { "name": "punctuation.definition.callout-fold.kova" },
+        "6": { "name": "markup.italic.callout-title.kova" }
       }
     },
     "template-variable": {
