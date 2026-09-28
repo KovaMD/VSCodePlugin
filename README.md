@@ -18,7 +18,7 @@ Kova extends plain Markdown with a small, closed set of directives. This extensi
 - **Callouts** — `> [!note]`, `> [!warning] Title`, and other Obsidian/GitHub-style admonitions
 - **Template variables** — `{title}`, `{author}`, `{date}`, `{slide_number}`, `{total}`
 
-See [`fixtures/sample.kova.md`](./fixtures/sample.kova.md) for one file exercising every token, and the [full syntax spec](https://github.com/KovaMD/Kova/blob/main/.github/CONTRIBUTING.md) in the main Kova repo.
+See [`examples/demo.kova.md`](./examples/demo.kova.md) for one file exercising every token, and the [full syntax spec](https://github.com/KovaMD/Kova/blob/main/.github/CONTRIBUTING.md) in the main Kova repo.
 
 Two known limitations:
 
@@ -46,4 +46,6 @@ Then press F5 to launch an Extension Development Host with `fixtures/sample.kova
 
 ## License
 
-GPL-3.0, matching the main [Kova](https://github.com/KovaMD/Kova) repository.
+This extension is free and open source software, released under the **GNU General Public License v3.0**.
+
+You are free to use, study, modify, and distribute this software under the terms of the GPL v3. Any modified versions distributed to others must also be made available under the GPL v3.
